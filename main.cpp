@@ -1,12 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+
 #include "GCodeParser.h"
 #include "PlotterDebug.h"
 
 int main() {
-    GCodeParser parser;
-    PlotterDebug plotter(&parser, [](auto buffer) { std::cout << buffer; });
+    PlotterDebug plotter([](auto buffer) { std::cout << buffer; });
+    GCodeParser parser(&plotter);
     std::ifstream infile("log01.txt");
     std::string buffer;
 
