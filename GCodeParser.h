@@ -8,7 +8,7 @@
 
 class GCodeParser {
 public:
-	GCodeParser(PlotterInterface* plotter = nullptr);
+    GCodeParser(PlotterInterface* plotter = nullptr);
     void parse(char const* g_code);
 
 private:
