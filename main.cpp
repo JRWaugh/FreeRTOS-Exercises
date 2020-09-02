@@ -6,10 +6,7 @@
 
 int main() {
     GCodeParser parser;
-    PlotterDebug plotter(&parser, [](auto buffer) {
-        std::cout << buffer;
-        });
-    
+    PlotterDebug plotter(&parser, [](auto buffer) { std::cout << buffer; });
     std::ifstream infile("log01.txt");
     std::string buffer;
 
