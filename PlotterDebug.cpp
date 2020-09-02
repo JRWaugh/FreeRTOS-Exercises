@@ -1,12 +1,6 @@
 #include "PlotterDebug.h"
 
-PlotterDebug::PlotterDebug(GCodeParser* const parser, void (*print_func)(char const*)) : parser{ parser }, print_func{ print_func } {
-    parser->attach(this);
-}
-
-PlotterDebug::~PlotterDebug() {
-    parser->detach(this);
-}
+PlotterDebug::PlotterDebug(void (*print_func)(char const*)) : print_func{ print_func } { }
 
 void PlotterDebug::onM1Received(uint8_t pen_position) noexcept {
     if constexpr (kShowDebug) {
@@ -34,7 +28,7 @@ void PlotterDebug::onM4Received(uint8_t laser_power) noexcept {
 
 void PlotterDebug::onM5Received(uint8_t a_step, uint8_t b_step, uint32_t height, uint32_t width, uint8_t speed) noexcept {
     if constexpr (kShowDebug) {
-        snprintf(buffer, 64, "[DEBUG] M5: A Step %d, B Step %d, Height %d, Width %d, Speed %d\r\n", a_step, b_step, height, width, speed);
+        snprintf(buffer, 64, "[DEBUG] M5: A Step %d, B Step %d, Height %ld, Width %ld, Speed %d\r\n", a_step, b_step, height, width, speed);
         print_func(buffer);
     }
     print_func(OK);
