@@ -1,14 +1,16 @@
-#pragma once
+#ifndef PLOTTERDEBUG_H_
+#define PLOTTERDEBUG_H_
+
 #include "PlotterInterface.h"
 #include "GCodeParser.h"
+#include <cstdio>
 
 class PlotterDebug : public PlotterInterface {
     constexpr static bool kShowErrors{ false };
-    constexpr static bool kShowDebug{ true };
+    constexpr static bool kShowDebug{ false };
 
 public:
-    PlotterDebug(GCodeParser* const parser, void (*print_func)(char const*) = [](char const* buffer) {});
-    ~PlotterDebug();
+    PlotterDebug(void (*print_func)(char const*) = [](char const* buffer) {});
 
     void onM1Received(uint8_t pen_position) noexcept;
     void onM2Received(uint8_t pen_up, uint8_t pen_down) noexcept;
@@ -21,8 +23,8 @@ public:
     void onError(char const* reason) const noexcept;
 
 private:
-    GCodeParser* const parser;
     void (*print_func)(char const* buffer);
     char buffer[64]{ 0 };
 };
 
+#endif /* PLOTTERDEBUG_H_ */
