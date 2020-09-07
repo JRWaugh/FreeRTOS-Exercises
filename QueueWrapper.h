@@ -21,8 +21,8 @@ public:
 		vQueueDelete(queue);
 	}
 
-    QueueWrapper(QueueWrapper const & queue) = delete;
-    QueueWrapper(QueueWrapper&&) = delete;
+	QueueWrapper(QueueWrapper const & queue) = delete;
+	QueueWrapper(QueueWrapper&&) = delete;
 
 	void push_front(const T& t, TickType_t ticksToWait = 0) noexcept {
 		if (!is_interrupt())
@@ -75,7 +75,7 @@ private:
 	QueueHandle_t queue;
 
 	[[nodiscard]] static inline bool is_interrupt() noexcept {
-	    return SCB->ICSR & SCB_ICSR_VECTACTIVE_Msk;
+		return SCB->ICSR & SCB_ICSR_VECTACTIVE_Msk;
 	}
 
 };
