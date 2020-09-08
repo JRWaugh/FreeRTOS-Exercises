@@ -5,23 +5,19 @@
  *      Author: Joshua
  */
 
-#ifndef FREERTOS_BIND_H_
-#define FREERTOS_BIND_H_
+#ifndef FREERTOS_TASK_H_
+#define FREERTOS_TASK_H_
 
 #include <type_traits>
 #include "FreeRTOS.h"
 #include "task.h"
 #include <type_traits>
 
-
-/* Bind a parameter to a FreeRTOS with compile-time type checking */
+/* Bind a parameter to a FreeRTOS task with compile-time type checking */
 namespace FreeRTOS {
 template <typename F, typename T>
-
-void inline Bind(
-		F&& f,
-		T* parameter,
-		char const * const name,
+void inline bind(
+		F&& f, T* parameter, char const * const name,
 		configSTACK_DEPTH_TYPE stack_size = configMINIMAL_STACK_SIZE,
 		UBaseType_t priority = tskIDLE_PRIORITY + 1UL,
 		TaskHandle_t * const created_task = nullptr) {
